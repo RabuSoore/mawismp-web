@@ -2,91 +2,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mawi Tools - Minecraft Server Toolkit</title>
+  <title>Mawi Tools Unik</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {font-family: 'Poppins', sans-serif; background: #1a1a1a; color: #fff; padding: 20px; margin: 0;}
+    body {font-family: 'Poppins', sans-serif; background: #1b1b1b; color: #fff; padding: 20px; margin: 0;}
     h1, h2 {color: #c42929; text-align: center;}
     textarea, input, select {width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 6px; font-size: 16px; background: #2a2a2a; color: #fff;}
     textarea {height: 100px; resize: vertical;}
     .tool {margin-top: 40px; background: #2a2a2a; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px #000;}
     button {margin-top: 10px; padding: 10px 20px; border: none; background: #c42929; color: #fff; border-radius: 6px; font-weight: bold; cursor: pointer;}
-    .preview, .output {margin-top: 15px; background: #333; padding: 10px; border-radius: 6px; overflow-x: auto;}
-    .section-title {margin-bottom: 10px; font-size: 20px;}
+    .output, .preview {margin-top: 15px; background: #333; padding: 10px; border-radius: 6px; overflow-x: auto;}
   </style>
 </head>
 <body>
-  <h1>Mawi Tools</h1>
-  <p style="text-align:center">Toolkit serbaguna untuk bantu pengembangan server Minecraft</p>  <!-- Tool 1: MOTD Generator -->  <div class="tool">
-    <h2>MOTD Color & Format Generator</h2>
-    <textarea id="motdInput" placeholder="Contoh: &aWelcome &cto &eMawiSMP!"></textarea>
-    <button onclick="generateMOTD()">Preview MOTD</button>
-    <div class="preview" id="motdPreview"></div>
-    <div class="output">
-      <b>Output untuk server.properties:</b>
-      <input type="text" id="motdOutput" readonly>
-    </div>
-  </div>  <!-- Tool 2: Item Lore Generator -->  <div class="tool">
-    <h2>Item Lore Generator</h2>
-    <textarea id="loreInput" placeholder="Tulis lore item... Gunakan &a, &b, &l, dll"></textarea>
-    <button onclick="generateLore()">Generate JSON</button>
-    <div class="output">
-      <b>Output JSON:</b>
-      <textarea id="loreOutput" readonly></textarea>
-    </div>
-  </div>  <!-- Tool 3: Permission Checker (Static Demo) -->  <div class="tool">
-    <h2>Permission Checker (Demo)</h2>
-    <input id="permInput" placeholder="Masukkan nama plugin (contoh: essentials)" />
-    <button onclick="checkPermission()">Cek Permission</button>
-    <div class="output" id="permResult">Contoh output: essentials.fly, essentials.spawn, ...</div>
-  </div>  <!-- Tool 4: GUI Layout Creator (Static Example) -->  <div class="tool">
-    <h2>GUI Layout Creator (Mockup)</h2>
-    <textarea placeholder="Slot 0: &aItem1\nSlot 1: &bItem2..."></textarea>
-    <div class="output">Contoh config:<br>slot0: item1<br>slot1: item2</div>
-  </div>  <!-- Tool 5: Server Config Validator (Basic demo) -->  <div class="tool">
-    <h2>Server Config Validator</h2>
-    <textarea id="configInput" placeholder="Tempel isi server.properties..."></textarea>
-    <button onclick="validateConfig()">Cek Config</button>
-    <div class="output" id="configResult">Tunggu hasil validasi...</div>
+  <h1>Mawi Unik Tools</h1>
+  <p style="text-align:center">5 Tools unik untuk developer Minecraft, tidak umum di web lain!</p>  <!-- Tool 1: UUID Converter -->  <div class="tool">
+    <h2>UUID Shortener</h2>
+    <input id="uuidInput" placeholder="Masukkan UUID (tanpa strip)">
+    <button onclick="shortUUID()">Shorten</button>
+    <div class="output" id="uuidOutput"></div>
+  </div>  <!-- Tool 2: Tick Time Converter -->  <div class="tool">
+    <h2>Ticks to Time</h2>
+    <input id="tickInput" type="number" placeholder="Masukkan jumlah ticks">
+    <button onclick="convertTicks()">Convert</button>
+    <div class="output" id="tickResult"></div>
+  </div>  <!-- Tool 3: Chat Color Previewer -->  <div class="tool">
+    <h2>Chat Color & Format Preview</h2>
+    <textarea id="chatColorInput" placeholder="Tulis chat dengan kode &a, &b, &l, &n..."></textarea>
+    <button onclick="renderChat()">Preview</button>
+    <div class="preview" id="chatPreview"></div>
+  </div>  <!-- Tool 4: TPS Visualizer (Mockup) -->  <div class="tool">
+    <h2>TPS Simulator</h2>
+    <input type="range" id="tpsRange" min="0" max="20" value="20" oninput="showTPS()">
+    <div class="output" id="tpsResult">TPS: 20 (Normal)</div>
+  </div>  <!-- Tool 5: Random Seed Generator -->  <div class="tool">
+    <h2>Seed Generator</h2>
+    <button onclick="generateSeed()">Generate</button>
+    <div class="output" id="seedOutput"></div>
   </div>  <script>
-    const colorMap = {
-      '&0': '#000','&1': '#00a','&2': '#0a0','&3': '#0aa','&4': '#a00','&5': '#a0a','&6': '#fa0','&7': '#aaa',
-      '&8': '#555','&9': '#55f','&a': '#5f5','&b': '#5ff','&c': '#f55','&d': '#f5f','&e': '#ff5','&f': '#fff'
+    function shortUUID() {
+      const uuid = document.getElementById('uuidInput').value;
+      const short = uuid.replace(/-/g, '').substring(0, 8);
+      document.getElementById('uuidOutput').innerText = 'Short UUID: ' + short;
+    }
+
+    function convertTicks() {
+      const ticks = parseInt(document.getElementById('tickInput').value);
+      const seconds = ticks / 20;
+      const minutes = Math.floor(seconds / 60);
+      const sec = (seconds % 60).toFixed(2);
+      document.getElementById('tickResult').innerText = `${ticks} ticks = ${minutes}m ${sec}s`;
+    }
+
+    const colors = {
+      '&0':'#000','&1':'#00a','&2':'#0a0','&3':'#0aa','&4':'#a00','&5':'#a0a','&6':'#fa0','&7':'#aaa','&8':'#555','&9':'#55f',
+      '&a':'#5f5','&b':'#5ff','&c':'#f55','&d':'#f5f','&e':'#ff5','&f':'#fff','&l':'font-weight:bold','&n':'text-decoration:underline','&o':'font-style:italic'
     };
 
-    function generateMOTD() {
-      const input = document.getElementById('motdInput').value;
-      let html = '', raw = '';
-      let parts = input.split(/(?=&[0-9a-f])/g);
-      parts.forEach(p => {
-        const code = p.slice(0,2), text = p.slice(2);
-        html += `<span style='color:${colorMap[code] || "#fff"}'>${text}</span>`;
-        raw += p;
+    function renderChat() {
+      const input = document.getElementById('chatColorInput').value;
+      let result = '', currentColor = '#fff', styles = '';
+      input.split(/(?=&[0-9a-fk-or])/).forEach(part => {
+        const code = part.substring(0,2), text = part.substring(2);
+        if (colors[code]) {
+          if (code === '&l') styles += 'font-weight:bold;';
+          else if (code === '&n') styles += 'text-decoration:underline;';
+          else if (code === '&o') styles += 'font-style:italic;';
+          else currentColor = colors[code];
+        }
+        result += `<span style='color:${currentColor};${styles}'>${text}</span>`;
       });
-      document.getElementById('motdPreview').innerHTML = html;
-      document.getElementById('motdOutput').value = raw;
+      document.getElementById('chatPreview').innerHTML = result;
     }
 
-    function generateLore() {
-      const lines = document.getElementById('loreInput').value.split('\n');
-      const json = lines.map(line => `{\"text\":\"${line}\"}`).join(',\n');
-      document.getElementById('loreOutput').value = `[
-${json}
-]`;
+    function showTPS() {
+      const tps = document.getElementById('tpsRange').value;
+      let status = 'Normal';
+      if (tps < 10) status = 'Lag Parah';
+      else if (tps < 17) status = 'Lag';
+      else if (tps < 20) status = 'Sedikit Delay';
+      document.getElementById('tpsResult').innerText = `TPS: ${tps} (${status})`;
     }
 
-    function checkPermission() {
-      const plugin = document.getElementById('permInput').value;
-      document.getElementById('permResult').innerText = `Contoh permission untuk '${plugin}':\n${plugin}.help\n${plugin}.use\n${plugin}.admin`;
-    }
-
-    function validateConfig() {
-      const config = document.getElementById('configInput').value;
-      let result = "";
-      if (!config.includes("motd")) result += "Tidak ada baris 'motd'.\n";
-      if (!config.includes("online-mode")) result += "Tidak ada 'online-mode'.\n";
-      if (result === "") result = "Config valid!";
-      document.getElementById('configResult').innerText = result;
+    function generateSeed() {
+      const seed = Math.floor(Math.random() * 1000000000);
+      document.getElementById('seedOutput').innerText = 'Seed: ' + seed;
     }
   </script></body>
 </html>
