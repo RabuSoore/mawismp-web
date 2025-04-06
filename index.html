@@ -1,140 +1,90 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MawiSMP Store & Wiki</title>
+  <title>Wiki MawiSMP</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-    body {background:#121212;color:#eee;line-height:1.6}
-    .container {max-width:1000px;margin:auto;padding:20px}
-    header {display:flex;justify-content:space-between;align-items:center;padding:20px;background:#1f1f1f;border-bottom:2px solid #f4b400}
-    header h1 {color:#f4b400;font-size:24px}
-    nav a {color:#eee;text-decoration:none;margin:0 10px;font-weight:600}
-    nav a:hover {color:#f4b400}
-    .section {margin:40px 0}
-    .card {background:#1e1e1e;padding:20px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.4);margin-bottom:20px}
-    .card h2 {color:#f4b400;margin-bottom:10px}
-    .card p, .card label {color:#ccc;font-size:15px}
-    input, select, textarea, button {width:100%;padding:10px;margin-top:10px;background:#2c2c2c;color:#fff;border:1px solid #444;border-radius:8px}
-    button {background:#f4b400;color:#000;font-weight:bold;cursor:pointer}
-    button:hover {background:#ffd633}
-    .copy-button {margin-top:10px;background:#333;color:#fff}
-    footer {text-align:center;margin:60px 0 20px;font-size:14px;color:#777}
-    img.qr {margin-top:15px;border:2px solid #444;border-radius:8px}
-    .highlight {background:#2a2a2a;padding:5px 10px;border-radius:6px;color:#f4b400;font-weight:bold}
+    * {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+    body {background:#1a1a1a;color:#fff;line-height:1.7;padding:20px}
+    header {background:#c42929;padding:30px 20px;border-radius:12px;margin-bottom:30px;text-align:center}
+    header h1 {font-size:2.5rem;margin-bottom:10px}
+    header p {font-size:1.1rem;color:#fcdede}
+    .section {margin-bottom:40px;background:#2a2a2a;padding:25px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.3)}
+    .section h2 {color:#c42929;margin-bottom:10px}
+    .section p, .section ul {color:#ddd}
+    footer {text-align:center;margin-top:60px;color:#999;font-size:14px}
   </style>
 </head>
 <body>
   <header>
-    <h1>MawiSMP Store & Wiki</h1>
-    <nav>
-      <a href="#store">Store</a>
-      <a href="#wiki">Wiki</a>
-      <a href="#admin">Admin</a>
-      <a href="#tentang">Tentang</a>
-    </nav>
-  </header>
-
-  <div class="container">
-    <section id="store" class="section">
-      <div class="card">
-        <h2>Store - Pembelian Rank VIP</h2>
-        <p>Beli rank <span class="highlight">VIP</span> seharga <strong>Rp15.000</strong>. Pembayaran via DANA, OVO, atau QRIS. Setelah bayar, kamu akan mendapatkan bukti bayar dan rank otomatis masuk.</p>
-        <label>Nickname Minecraft:</label>
-        <input type="text" id="nickname" placeholder="Contoh: MawiPlayer">
-
-        <label>Pilih Metode Pembayaran:</label>
-        <select id="metode">
-          <option value="DANA">DANA</option>
-          <option value="OVO">OVO</option>
-          <option value="QRIS">QRIS</option>
-        </select>
-
-        <button onclick="generateInvoice()">Bayar Sekarang</button>
-        <div id="invoiceBox"></div>
-      </div>
-    </section>
-
-    <section id="wiki" class="section">
-      <div class="card">
-        <h2>Wiki - Command & Item Khusus</h2>
-        <p>Temukan command dan penjelasan item-item khusus di server MawiSMP. Klik tombol salin untuk langsung meng-copy command ke clipboard.</p>
-
-        <div class="card">
-          <h3>Pedang Legendaris</h3>
-          <p>Pedang api dengan efek knockback tinggi.</p>
-          <button class="copy-button" onclick="copyCommand('/give @p diamond_sword{display:{Name:\"\\\"Pedang Legendaris\\\"\"}}')">Salin Command</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="admin" class="section">
-      <div class="card">
-        <h2>Panel Admin</h2>
-        <p>Hanya untuk admin server. Gunakan form di bawah untuk menambahkan data wiki atau melihat log transaksi pembelian.</p>
-
-        <div class="card">
-          <h3>Tambah Wiki</h3>
-          <input type="text" id="judulWiki" placeholder="Judul Wiki">
-          <textarea id="isiWiki" placeholder="Isi wiki..."></textarea>
-          <button onclick="tambahWiki()">Tambahkan</button>
-        </div>
-
-        <div class="card">
-          <h3>Log Transaksi</h3>
-          <div id="logTransaksi"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tentang" class="section">
-      <div class="card">
-        <h2>Tentang MawiSMP</h2>
-        <p><strong>MawiSMP</strong> adalah server Minecraft Indonesia dengan fitur survival, PvP, minigames, dan item custom. Kami hadir untuk memberikan pengalaman bermain terbaik bagi pemain Indonesia!</p>
-      </div>
-    </section>
-
-    <footer>
-      &copy; 2025 MawiSMP. All rights reserved.
-    </footer>
-  </div>
-
-  <script>
-    function copyCommand(command) {
-      navigator.clipboard.writeText(command);
-      alert("Command disalin: " + command);
-    }
-
-    function generateInvoice() {
-      const nick = document.getElementById('nickname').value;
-      const metode = document.getElementById('metode').value;
-      const trxID = Math.floor(Math.random() * 1000000);
-      const invoice = `
-        <div class='card'>
-          <h3>Bukti Pembayaran</h3>
-          <p>ID Transaksi: <span class='highlight'>${trxID}</span><br>Metode: ${metode}<br>Nama: ${nick}</p>
-          <p><strong>Scan QR berikut untuk melakukan pembayaran:</strong></p>
-          <img src='https://via.placeholder.com/250x250?text=QR+${trxID}' alt='QR' class='qr'>
-        </div>`;
-      document.getElementById('invoiceBox').innerHTML = invoice;
-      simpanTransaksi(trxID, nick, metode);
-    }
-
-    function simpanTransaksi(id, nama, metode) {
-      const log = document.getElementById("logTransaksi");
-      const html = `<p><strong>${id}</strong> - ${nama} (${metode})</p>`;
-      log.innerHTML += html;
-    }
-
-    function tambahWiki() {
-      const judul = document.getElementById("judulWiki").value;
-      const isi = document.getElementById("isiWiki").value;
-      const wiki = `<div class='card'><h3>${judul}</h3><p>${isi}</p><button class='copy-button' onclick="copyCommand('${judul}')">Salin</button></div>`;
-      document.getElementById("wiki").innerHTML += wiki;
-      alert("Wiki berhasil ditambahkan!");
-    }
-  </script>
+    <h1>Wiki MawiSMP</h1>
+    <p>Selamat datang di pusat informasi server Minecraft terbaik Indonesia!</p>
+  </header>  <section class="section">
+    <h2>Apa itu MawiSMP?</h2>
+    <p>MawiSMP adalah server Minecraft Survival Multiplayer (SMP) yang mengusung konsep semi-roleplay, community-driven, dan diperkaya dengan sistem ekonomi, kompetisi PvP, dan event bulanan. Server ini dirancang untuk semua kalangan pemain, dari yang santai hingga yang suka tantangan.</p>
+  </section>  <section class="section">
+    <h2>Fitur Unggulan</h2>
+    <ul>
+      <li>Custom Item & Skill unik yang bisa dikembangkan</li>
+      <li>Mini Games: Parkour, PvP, Fishing Contest, dan Boss Raid</li>
+      <li>Economy System: Jual beli item, job harian, dan player market</li>
+      <li>Clan System: Buat dan kembangkan clan-mu sendiri</li>
+      <li>Leaderboard mingguan dan reward menarik</li>
+      <li>Battle Pass sistem dengan tier hadiah</li>
+      <li>Quest System dan Daily Reward</li>
+      <li>Cross-server Chat dan Community Discord</li>
+    </ul>
+  </section>  <section class="section">
+    <h2>Command Penting</h2>
+    <ul>
+      <li><code>/spawn</code> - Kembali ke tempat utama</li>
+      <li><code>/sethome</code> & <code>/home</code> - Tandai dan kunjungi rumahmu</li>
+      <li><code>/warp</code> - Lihat semua warp publik</li>
+      <li><code>/shop</code> - Buka menu belanja</li>
+      <li><code>/jobs</code> - Lihat dan ambil pekerjaan</li>
+      <li><code>/clan</code> - Kelola clan</li>
+      <li><code>/quests</code> - Lihat dan klaim misi</li>
+    </ul>
+  </section>  <section class="section">
+    <h2>Rank & Donasi</h2>
+    <p>Kamu bisa mendukung server dengan membeli rank premium seperti VIP, MVP, dan ELITE. Setiap rank memiliki benefit spesial seperti:</p>
+    <ul>
+      <li>Prefix warna khusus</li>
+      <li>Akses fitur eksklusif (seperti /craft, /anvil, /ec)</li>
+      <li>Item harian & crate gratis</li>
+      <li>Warp VIP, arena khusus, dan slot prioritas</li>
+    </ul>
+    <p>Pembayaran bisa via QRIS, Dana, OVO, Gopay, dan Pulsa melalui sistem otomatis Tripay.</p>
+  </section>  <section class="section">
+    <h2>Peraturan Server</h2>
+    <ul>
+      <li>Dilarang menggunakan mod/cheat/bug exploit</li>
+      <li>Griefing dan stealing sangat dilarang</li>
+      <li>Dilarang AFK mesin farm berlebihan</li>
+      <li>Gunakan bahasa yang baik dan sopan</li>
+      <li>Hormati sesama pemain dan staff</li>
+    </ul>
+  </section>  <section class="section">
+    <h2>Event dan Turnamen</h2>
+    <p>Setiap bulan kami mengadakan event spesial seperti:</p>
+    <ul>
+      <li>Fishing Tournament dengan hadiah saldo</li>
+      <li>PvP Bracket (1v1) dengan hadiah rank</li>
+      <li>Build Competition bertema tertentu</li>
+      <li>Treasure Hunt keliling dunia SMP</li>
+    </ul>
+    <p>Pemenang akan diumumkan di Discord dan website wiki ini!</p>
+  </section>  <section class="section">
+    <h2>Tim Staff MawiSMP</h2>
+    <ul>
+      <li><strong>Owner:</strong> MawiDev</li>
+      <li><strong>Admin:</strong> VelixMC, Arka</li>
+      <li><strong>Moderator:</strong> Jenny, Rushz</li>
+      <li><strong>Builder:</strong> LemonCraft, Zero</li>
+    </ul>
+  </section>  <footer>
+    &copy; 2025 MawiSMP - Seluruh hak cipta dilindungi. Bergabunglah bersama komunitas kami dan jadilah bagian dari petualangan seru!
+  </footer>
 </body>
 </html>
