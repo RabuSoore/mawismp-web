@@ -1,92 +1,65 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mawi Tools Unik</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Minecraft Language Translator</title>
   <style>
-    body {font-family: 'Poppins', sans-serif; background: #1b1b1b; color: #fff; padding: 20px; margin: 0;}
-    h1, h2 {color: #c42929; text-align: center;}
-    textarea, input, select {width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 6px; font-size: 16px; background: #2a2a2a; color: #fff;}
-    textarea {height: 100px; resize: vertical;}
-    .tool {margin-top: 40px; background: #2a2a2a; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px #000;}
-    button {margin-top: 10px; padding: 10px 20px; border: none; background: #c42929; color: #fff; border-radius: 6px; font-weight: bold; cursor: pointer;}
-    .output, .preview {margin-top: 15px; background: #333; padding: 10px; border-radius: 6px; overflow-x: auto;}
+    body { font-family: Arial, sans-serif; background: #1b1b1b; color: #fff; padding: 20px; }
+    textarea, button { width: 100%; margin-top: 10px; padding: 10px; border-radius: 6px; border: none; }
+    textarea { height: 200px; resize: vertical; background: #2c2c2c; color: white; }
+    button { background: #c42929; color: white; font-weight: bold; cursor: pointer; }
+    .output { background: #2c2c2c; margin-top: 20px; padding: 10px; border-radius: 6px; white-space: pre-wrap; }
   </style>
 </head>
 <body>
-  <h1>Mawi Unik Tools</h1>
-  <p style="text-align:center">5 Tools unik untuk developer Minecraft, tidak umum di web lain!</p>  <!-- Tool 1: UUID Converter -->  <div class="tool">
-    <h2>UUID Shortener</h2>
-    <input id="uuidInput" placeholder="Masukkan UUID (tanpa strip)">
-    <button onclick="shortUUID()">Shorten</button>
-    <div class="output" id="uuidOutput"></div>
-  </div>  <!-- Tool 2: Tick Time Converter -->  <div class="tool">
-    <h2>Ticks to Time</h2>
-    <input id="tickInput" type="number" placeholder="Masukkan jumlah ticks">
-    <button onclick="convertTicks()">Convert</button>
-    <div class="output" id="tickResult"></div>
-  </div>  <!-- Tool 3: Chat Color Previewer -->  <div class="tool">
-    <h2>Chat Color & Format Preview</h2>
-    <textarea id="chatColorInput" placeholder="Tulis chat dengan kode &a, &b, &l, &n..."></textarea>
-    <button onclick="renderChat()">Preview</button>
-    <div class="preview" id="chatPreview"></div>
-  </div>  <!-- Tool 4: TPS Visualizer (Mockup) -->  <div class="tool">
-    <h2>TPS Simulator</h2>
-    <input type="range" id="tpsRange" min="0" max="20" value="20" oninput="showTPS()">
-    <div class="output" id="tpsResult">TPS: 20 (Normal)</div>
-  </div>  <!-- Tool 5: Random Seed Generator -->  <div class="tool">
-    <h2>Seed Generator</h2>
-    <button onclick="generateSeed()">Generate</button>
-    <div class="output" id="seedOutput"></div>
-  </div>  <script>
-    function shortUUID() {
-      const uuid = document.getElementById('uuidInput').value;
-      const short = uuid.replace(/-/g, '').substring(0, 8);
-      document.getElementById('uuidOutput').innerText = 'Short UUID: ' + short;
-    }
+  <h1>Translator File Language Minecraft</h1>
+  <p>Masukkan teks berformat key=value atau key: value. Hanya bagian setelah = atau : yang diterjemahkan.<br>
+  Kata dalam tanda %...%, (...), {...} tidak akan diterjemahkan.</p>
 
-    function convertTicks() {
-      const ticks = parseInt(document.getElementById('tickInput').value);
-      const seconds = ticks / 20;
-      const minutes = Math.floor(seconds / 60);
-      const sec = (seconds % 60).toFixed(2);
-      document.getElementById('tickResult').innerText = `${ticks} ticks = ${minutes}m ${sec}s`;
-    }
+  <textarea id="input" placeholder="example.key=Welcome to the server!"></textarea>
+  <button onclick="translateText()">Terjemahkan</button>
+  <div class="output" id="output"></div>
 
-    const colors = {
-      '&0':'#000','&1':'#00a','&2':'#0a0','&3':'#0aa','&4':'#a00','&5':'#a0a','&6':'#fa0','&7':'#aaa','&8':'#555','&9':'#55f',
-      '&a':'#5f5','&b':'#5ff','&c':'#f55','&d':'#f5f','&e':'#ff5','&f':'#fff','&l':'font-weight:bold','&n':'text-decoration:underline','&o':'font-style:italic'
-    };
+  <script>
+    async function translateText() {
+      const input = document.getElementById("input").value;
+      const lines = input.split(/\n/);
+      const translatedLines = [];
 
-    function renderChat() {
-      const input = document.getElementById('chatColorInput').value;
-      let result = '', currentColor = '#fff', styles = '';
-      input.split(/(?=&[0-9a-fk-or])/).forEach(part => {
-        const code = part.substring(0,2), text = part.substring(2);
-        if (colors[code]) {
-          if (code === '&l') styles += 'font-weight:bold;';
-          else if (code === '&n') styles += 'text-decoration:underline;';
-          else if (code === '&o') styles += 'font-style:italic;';
-          else currentColor = colors[code];
+      for (const line of lines) {
+        const match = line.match(/^(.*?[=:])\s*(.*)$/);
+        if (!match) {
+          translatedLines.push(line);
+          continue;
         }
-        result += `<span style='color:${currentColor};${styles}'>${text}</span>`;
-      });
-      document.getElementById('chatPreview').innerHTML = result;
-    }
 
-    function showTPS() {
-      const tps = document.getElementById('tpsRange').value;
-      let status = 'Normal';
-      if (tps < 10) status = 'Lag Parah';
-      else if (tps < 17) status = 'Lag';
-      else if (tps < 20) status = 'Sedikit Delay';
-      document.getElementById('tpsResult').innerText = `TPS: ${tps} (${status})`;
-    }
+        const [_, prefix, content] = match;
 
-    function generateSeed() {
-      const seed = Math.floor(Math.random() * 1000000000);
-      document.getElementById('seedOutput').innerText = 'Seed: ' + seed;
+        const skipped = [];
+        const placeholderRegex = /(%.*?%|.*?|\{.*?\})/g;
+        let modifiedContent = content;
+
+        modifiedContent = modifiedContent.replace(placeholderRegex, (m) => {
+          skipped.push(m);
+          return `__PLACEHOLDER_${skipped.length - 1}__`;
+        });
+
+        try {
+          const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(modifiedContent)}&langpair=en|id`);
+          const json = await res.json();
+          let translated = json.responseData.translatedText;
+
+          translated = translated.replace(/__PLACEHOLDER_(\d+)__/g, (_, index) => skipped[+index]);
+
+          translatedLines.push(`${prefix} ${translated}`);
+        } catch (e) {
+          translatedLines.push(line); // fallback to original
+        }
+      }
+
+      document.getElementById("output").textContent = translatedLines.join("\n");
     }
-  </script></body>
+  </script>
+</body>
 </html>
