@@ -2,89 +2,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wiki MawiSMP</title>
+  <title>Mawi Tools - Minecraft Server Toolkit</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
-    body {background:#1a1a1a;color:#fff;line-height:1.7;padding:20px}
-    header {background:#c42929;padding:30px 20px;border-radius:12px;margin-bottom:30px;text-align:center}
-    header h1 {font-size:2.5rem;margin-bottom:10px}
-    header p {font-size:1.1rem;color:#fcdede}
-    .section {margin-bottom:40px;background:#2a2a2a;padding:25px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.3)}
-    .section h2 {color:#c42929;margin-bottom:10px}
-    .section p, .section ul {color:#ddd}
-    footer {text-align:center;margin-top:60px;color:#999;font-size:14px}
+    body {font-family: 'Poppins', sans-serif; background: #1a1a1a; color: #fff; padding: 20px; margin: 0;}
+    h1, h2 {color: #c42929; text-align: center;}
+    textarea, input, select {width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 6px; font-size: 16px; background: #2a2a2a; color: #fff;}
+    textarea {height: 100px; resize: vertical;}
+    .tool {margin-top: 40px; background: #2a2a2a; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px #000;}
+    button {margin-top: 10px; padding: 10px 20px; border: none; background: #c42929; color: #fff; border-radius: 6px; font-weight: bold; cursor: pointer;}
+    .preview, .output {margin-top: 15px; background: #333; padding: 10px; border-radius: 6px; overflow-x: auto;}
+    .section-title {margin-bottom: 10px; font-size: 20px;}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Wiki MawiSMP</h1>
-    <p>Selamat datang di pusat informasi server Minecraft terbaik Indonesia!</p>
-  </header>  <section class="section">
-    <h2>Apa itu MawiSMP?</h2>
-    <p>MawiSMP adalah server Minecraft Survival Multiplayer (SMP) yang mengusung konsep semi-roleplay, community-driven, dan diperkaya dengan sistem ekonomi, kompetisi PvP, dan event bulanan. Server ini dirancang untuk semua kalangan pemain, dari yang santai hingga yang suka tantangan.</p>
-  </section>  <section class="section">
-    <h2>Fitur Unggulan</h2>
-    <ul>
-      <li>Custom Item & Skill unik yang bisa dikembangkan</li>
-      <li>Mini Games: Parkour, PvP, Fishing Contest, dan Boss Raid</li>
-      <li>Economy System: Jual beli item, job harian, dan player market</li>
-      <li>Clan System: Buat dan kembangkan clan-mu sendiri</li>
-      <li>Leaderboard mingguan dan reward menarik</li>
-      <li>Battle Pass sistem dengan tier hadiah</li>
-      <li>Quest System dan Daily Reward</li>
-      <li>Cross-server Chat dan Community Discord</li>
-    </ul>
-  </section>  <section class="section">
-    <h2>Command Penting</h2>
-    <ul>
-      <li><code>/spawn</code> - Kembali ke tempat utama</li>
-      <li><code>/sethome</code> & <code>/home</code> - Tandai dan kunjungi rumahmu</li>
-      <li><code>/warp</code> - Lihat semua warp publik</li>
-      <li><code>/shop</code> - Buka menu belanja</li>
-      <li><code>/jobs</code> - Lihat dan ambil pekerjaan</li>
-      <li><code>/clan</code> - Kelola clan</li>
-      <li><code>/quests</code> - Lihat dan klaim misi</li>
-    </ul>
-  </section>  <section class="section">
-    <h2>Rank & Donasi</h2>
-    <p>Kamu bisa mendukung server dengan membeli rank premium seperti VIP, MVP, dan ELITE. Setiap rank memiliki benefit spesial seperti:</p>
-    <ul>
-      <li>Prefix warna khusus</li>
-      <li>Akses fitur eksklusif (seperti /craft, /anvil, /ec)</li>
-      <li>Item harian & crate gratis</li>
-      <li>Warp VIP, arena khusus, dan slot prioritas</li>
-    </ul>
-    <p>Pembayaran bisa via QRIS, Dana, OVO, Gopay, dan Pulsa melalui sistem otomatis Tripay.</p>
-  </section>  <section class="section">
-    <h2>Peraturan Server</h2>
-    <ul>
-      <li>Dilarang menggunakan mod/cheat/bug exploit</li>
-      <li>Griefing dan stealing sangat dilarang</li>
-      <li>Dilarang AFK mesin farm berlebihan</li>
-      <li>Gunakan bahasa yang baik dan sopan</li>
-      <li>Hormati sesama pemain dan staff</li>
-    </ul>
-  </section>  <section class="section">
-    <h2>Event dan Turnamen</h2>
-    <p>Setiap bulan kami mengadakan event spesial seperti:</p>
-    <ul>
-      <li>Fishing Tournament dengan hadiah saldo</li>
-      <li>PvP Bracket (1v1) dengan hadiah rank</li>
-      <li>Build Competition bertema tertentu</li>
-      <li>Treasure Hunt keliling dunia SMP</li>
-    </ul>
-    <p>Pemenang akan diumumkan di Discord dan website wiki ini!</p>
-  </section>  <section class="section">
-    <h2>Tim Staff MawiSMP</h2>
-    <ul>
-      <li><strong>Owner:</strong> MawiDev</li>
-      <li><strong>Admin:</strong> VelixMC, Arka</li>
-      <li><strong>Moderator:</strong> Jenny, Rushz</li>
-      <li><strong>Builder:</strong> LemonCraft, Zero</li>
-    </ul>
-  </section>  <footer>
-    &copy; 2025 MawiSMP - Seluruh hak cipta dilindungi. Bergabunglah bersama komunitas kami dan jadilah bagian dari petualangan seru!
-  </footer>
-</body>
+  <h1>Mawi Tools</h1>
+  <p style="text-align:center">Toolkit serbaguna untuk bantu pengembangan server Minecraft</p>  <!-- Tool 1: MOTD Generator -->  <div class="tool">
+    <h2>MOTD Color & Format Generator</h2>
+    <textarea id="motdInput" placeholder="Contoh: &aWelcome &cto &eMawiSMP!"></textarea>
+    <button onclick="generateMOTD()">Preview MOTD</button>
+    <div class="preview" id="motdPreview"></div>
+    <div class="output">
+      <b>Output untuk server.properties:</b>
+      <input type="text" id="motdOutput" readonly>
+    </div>
+  </div>  <!-- Tool 2: Item Lore Generator -->  <div class="tool">
+    <h2>Item Lore Generator</h2>
+    <textarea id="loreInput" placeholder="Tulis lore item... Gunakan &a, &b, &l, dll"></textarea>
+    <button onclick="generateLore()">Generate JSON</button>
+    <div class="output">
+      <b>Output JSON:</b>
+      <textarea id="loreOutput" readonly></textarea>
+    </div>
+  </div>  <!-- Tool 3: Permission Checker (Static Demo) -->  <div class="tool">
+    <h2>Permission Checker (Demo)</h2>
+    <input id="permInput" placeholder="Masukkan nama plugin (contoh: essentials)" />
+    <button onclick="checkPermission()">Cek Permission</button>
+    <div class="output" id="permResult">Contoh output: essentials.fly, essentials.spawn, ...</div>
+  </div>  <!-- Tool 4: GUI Layout Creator (Static Example) -->  <div class="tool">
+    <h2>GUI Layout Creator (Mockup)</h2>
+    <textarea placeholder="Slot 0: &aItem1\nSlot 1: &bItem2..."></textarea>
+    <div class="output">Contoh config:<br>slot0: item1<br>slot1: item2</div>
+  </div>  <!-- Tool 5: Server Config Validator (Basic demo) -->  <div class="tool">
+    <h2>Server Config Validator</h2>
+    <textarea id="configInput" placeholder="Tempel isi server.properties..."></textarea>
+    <button onclick="validateConfig()">Cek Config</button>
+    <div class="output" id="configResult">Tunggu hasil validasi...</div>
+  </div>  <script>
+    const colorMap = {
+      '&0': '#000','&1': '#00a','&2': '#0a0','&3': '#0aa','&4': '#a00','&5': '#a0a','&6': '#fa0','&7': '#aaa',
+      '&8': '#555','&9': '#55f','&a': '#5f5','&b': '#5ff','&c': '#f55','&d': '#f5f','&e': '#ff5','&f': '#fff'
+    };
+
+    function generateMOTD() {
+      const input = document.getElementById('motdInput').value;
+      let html = '', raw = '';
+      let parts = input.split(/(?=&[0-9a-f])/g);
+      parts.forEach(p => {
+        const code = p.slice(0,2), text = p.slice(2);
+        html += `<span style='color:${colorMap[code] || "#fff"}'>${text}</span>`;
+        raw += p;
+      });
+      document.getElementById('motdPreview').innerHTML = html;
+      document.getElementById('motdOutput').value = raw;
+    }
+
+    function generateLore() {
+      const lines = document.getElementById('loreInput').value.split('\n');
+      const json = lines.map(line => `{\"text\":\"${line}\"}`).join(',\n');
+      document.getElementById('loreOutput').value = `[
+${json}
+]`;
+    }
+
+    function checkPermission() {
+      const plugin = document.getElementById('permInput').value;
+      document.getElementById('permResult').innerText = `Contoh permission untuk '${plugin}':\n${plugin}.help\n${plugin}.use\n${plugin}.admin`;
+    }
+
+    function validateConfig() {
+      const config = document.getElementById('configInput').value;
+      let result = "";
+      if (!config.includes("motd")) result += "Tidak ada baris 'motd'.\n";
+      if (!config.includes("online-mode")) result += "Tidak ada 'online-mode'.\n";
+      if (result === "") result = "Config valid!";
+      document.getElementById('configResult').innerText = result;
+    }
+  </script></body>
 </html>
